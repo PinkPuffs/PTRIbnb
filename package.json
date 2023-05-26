@@ -1,0 +1,55 @@
+{
+  "name": "ptribnb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"webpack-dev-server --open --hot --progress\" \"nodemon backend/server.ts\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PinkPuffs/PTRIbnb.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PinkPuffs/PTRIbnb/issues"
+  },
+  "homepage": "https://github.com/PinkPuffs/PTRIbnb#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.21.5",
+    "@babel/preset-react": "^7.18.6",
+    "@types/cookie-parser": "^1.4.3",
+    "@types/cors": "^2.8.13",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.17",
+    "@types/react": "^18.2.7",
+    "@types/react-dom": "^18.2.4",
+    "babel-loader": "^9.1.2",
+    "concurrently": "^8.0.1",
+    "css-loader": "^6.7.4",
+    "cypress": "^12.13.0",
+    "html-webpack-plugin": "^5.5.1",
+    "i": "^0.3.7",
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.22",
+    "npm": "^9.6.7",
+    "style-loader": "^3.3.3",
+    "tailwindcss": "^3.3.2",
+    "ts-loader": "^9.4.3",
+    "ts-node": "^10.9.1",
+    "tsc": "^2.0.4",
+    "typescript": "^5.0.4",
+    "webpack": "^5.84.0",
+    "webpack-cli": "^5.1.1",
+    "webpack-dev-server": "^4.15.0"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
