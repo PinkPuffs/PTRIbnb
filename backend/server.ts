@@ -1,11 +1,11 @@
 import * as path from 'path';
-import * as express from 'express';
+import  express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { buildSchema } from 'graphql';
 import { Request, Response, NextFunction } from 'express';
-import * as env from 'dotenv';
-import * as cors from 'cors';
-import * as cookieParser from 'cookie-parser';
+import env from 'dotenv';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
 // import * as routes from './routes/api';
 
 
