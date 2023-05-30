@@ -16,7 +16,7 @@ type Query {
 `)
 
 const root = {
-  r// plaxe holder
+  // plaxe holder
 }
 
 env.config();
