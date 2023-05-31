@@ -5,7 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"webpack-dev-server --open --hot --progress\" \"nodemon backend/server.ts\""
+    "dev": "concurrently \"webpack-dev-server --open --hot --progress\" \"nodemon backend/server.ts\"",
+    "buildcss": "tailwindcss build frontend/styles.css -o frontend/tailwind.css",
+    "buildcssprod": "NODE_ENV=production tailwindcss build frontend/styles.css -o public/styles.css"
   },
   "repository": {
     "type": "git",
@@ -50,6 +52,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.2"
   }
 }
