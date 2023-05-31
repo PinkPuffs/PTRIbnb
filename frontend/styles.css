@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* custom css here */
+/* .test-class {
+  color: red;
+}
+
+.class-aa {
+  border: 1px;
+  border-color: black;
+} */
+
+
