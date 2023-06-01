@@ -4,6 +4,10 @@ import { Request, Response, NextFunction } from 'express';
 import env from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+const passport = require('passport')
+const session = require('express-session')
+const authenticate = require('./controllers/authController')
+
 
 
 // import * as routes from './routes/api';
@@ -16,16 +20,34 @@ app.use(cors());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public'));
+
+app.use(session({
+  secret: '1',
+  resave: false,
+  saveUninitialized: false
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Routes
-app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
-});
 
-app.use((req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
-});
+app.get('/google', passport.authenticate('google'))
+
+app.get('/authenticate', passport.authenticate('google', {
+    successRedirect: '/',
+    failureRedirect: '/'
+}))
+
+// app.use(express.static(__dirname + 'public'));
+
+// app.get('/', (req, res, next) => {
+//   return res.status(200).sendFile(path.join(__dirname, '../index.html'))
+// });
+
+// app.use((req, res) => {
+//   return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+// });
 
 //Error Handling
 type ErrorObject = {
