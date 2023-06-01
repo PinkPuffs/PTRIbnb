@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "../../frontend/tailwind.css";
 import { loginFields } from "../constants/formFields";
 import Input from "./Input";
-import FormExtra from './FormExtra';
-import FormAction from './FormAction';
+import FormExtra from "./FormExtra";
+import FormAction from "./FormAction";
 
 const URL = "http://localhost:3000/";
 
@@ -21,11 +21,9 @@ export default function Login() {
     e.preventDefault();
 
     authenticateUser(e);
-
   };
 
-  const authenticateUser = (e:any) =>{
-
+  const authenticateUser = (e: any) => {
     console.log(e.target.emailaddress.value);
     console.log(e.target.password.value);
 
@@ -50,14 +48,11 @@ export default function Login() {
         //   SetLoginStatus(data);
         // }
       });
-
-  }
-
+  };
 
   const [loginState, setLoginState] = useState(fieldsState);
 
-  const handleChange = (e:any) => {
-    
+  const handleChange = (e: any) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
   };
 
@@ -79,10 +74,9 @@ export default function Login() {
               placeholder={field.placeholder}
             />
           ))}
-
         </div>
-        <FormAction handleSubmit={handleClick} text="Login"/>
-        <FormExtra/>
+        <FormAction handleSubmit={handleClick} text="Login" />
+        <FormExtra />
       </form>
     </section>
   );
