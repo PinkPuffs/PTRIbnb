@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
+import img1 from '../assets/PTRIBnB_logo_white.png';
 
 const Header: FC<{
   heading?: string;
@@ -12,8 +13,8 @@ const Header: FC<{
       <div className="flex justify-center">
         <img
           alt=""
-          className="h-14 w-14"
-          src="https://ik.imagekit.io/pibjyepn7p9/Lilac_Navy_Simple_Line_Business_Logo_CGktk8RHK.png?ik-sdk-version=javascript-1.4.3&updatedAt=1649962071315"
+          className="h-200 w-200"
+          src={img1}
         />
       </div>
       <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -23,7 +24,7 @@ const Header: FC<{
         {paragraph}{" "}
         <Link
           to={linkUrl}
-          className="font-medium text-purple-600 hover:text-purple-500"
+          className="font-medium text-blue-600 hover:text-blue-500"
         >
           {linkName}
         </Link>

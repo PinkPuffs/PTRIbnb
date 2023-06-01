@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../frontend/tailwind.css";
-import { loginFields } from "../constants/formFields";
+import { signupFields } from "../constants/formFields";
 import Input from "./Input";
 import FormExtra from './FormExtra';
 import FormAction from './FormAction';
@@ -11,20 +11,20 @@ interface fieldsState {
   [index: string]: string;
 }
 
-const fields = loginFields;
+const fields = signupFields;
 let fieldsState: fieldsState = {};
 fields.forEach((field) => (fieldsState[field.id] = ""));
 
-export default function Login() {
+export default function Signup() {
   const handleClick = (e: any) => {
     //prevent form from auto-sending?
     e.preventDefault();
 
-    authenticateUser(e);
+    createUser(e);
 
   };
 
-  const authenticateUser = (e:any) =>{
+  const createUser = (e:any) =>{
 
     console.log(e.target.emailaddress.value);
     console.log(e.target.password.value);
@@ -41,7 +41,7 @@ export default function Login() {
       }),
     };
 
-    fetch(URL + "login", options)
+    fetch(URL + "signup", options)
       .then((data) => data.json())
       .then((data) => {
         console.log(data);
@@ -54,22 +54,22 @@ export default function Login() {
   }
 
 
-  const [loginState, setLoginState] = useState(fieldsState);
+  const [signupState,setSignupState] = useState(fieldsState);
 
   const handleChange = (e:any) => {
     
-    setLoginState({ ...loginState, [e.target.id]: e.target.value });
+    setSignupState({ ...signupState, [e.target.id]: e.target.value });
   };
 
   return (
     <section>
       <form className="mt-8 space-y-6" onSubmit={handleClick}>
-        <div className="-space-y-px">
+      
           {fields.map((field) => (
             <Input
               key={field.id}
               handleChange={handleChange}
-              value={loginState[field.id]}
+              value={signupState[field.id]}
               labelText={field.labelText}
               labelFor={field.labelFor}
               id={field.id}
@@ -80,8 +80,8 @@ export default function Login() {
             />
           ))}
 
-        </div>
-        <FormAction handleSubmit={handleClick} text="Login"/>
+       
+        <FormAction handleSubmit={handleClick} text="Signup"/>
         <FormExtra/>
       </form>
     </section>
