@@ -1,6 +1,6 @@
 import { Pool } from 'pg'
 
-const PG_URI = 'postgres://wbwwdvzc:xV-KG6VJr2aOyeATlFsQTPeLi6CLXJ8m@mahmud.db.elephantsql.com/wbwwdvzc'
+const PG_URI = process.env.PG_URI
 
 const pool = new Pool({
   connectionString: PG_URI
