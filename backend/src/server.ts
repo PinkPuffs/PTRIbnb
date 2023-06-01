@@ -1,23 +1,12 @@
 import * as path from 'path';
 import express from 'express';
-import { graphqlHTTP } from 'express-graphql';
-import { buildSchema } from 'graphql';
+// import { graphqlHTTP } from 'express-graphql';
+// import { buildSchema } from 'graphql';
 import { Request, Response, NextFunction } from 'express';
 import env from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 // import * as routes from './routes/api';
-
-
-const schema = buildSchema(`
-type Query {
-  
-}
-`)
-
-const root = {
-  // plaxe holder
-}
 
 env.config();
 // Create a new Express app
@@ -30,11 +19,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-// app.use('/graphql', graphqlHTTP({
-//   schema: schema,
-//   rootValue: root,
-//   graphiql: true,
-// }))
 
 // Routes
 app.get('/', (req, res) => {
