@@ -2,22 +2,13 @@ import { Strategy } from "passport-google-oauth20"
 
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
-// const db = {
-//     query: (arg1: string, arg2: any, arg3: any) => {
-//         console.log(arg1, arg2, arg3)
-//     }
-// }
-
-// const callbackURL = 'http://localhost:8080/authenticate'
-// const clientID = '30815415088-dh25eicl6digdninprue1jus4oqnn909.apps.googleusercontent.com'
-// const clientSecret = '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'
 
 passport.serializeUser((user: any, done: any) => {
+    
     done(null, user.id)
 })
 
 passport.deserializeUser((user: any, done: any) => {
-    //find user data from database based on serialized id
 
     done(null, user)
 })
@@ -25,7 +16,7 @@ passport.deserializeUser((user: any, done: any) => {
 passport.use(new GoogleStrategy({
     clientID: '30815415088-dh25eicl6digdninprue1jus4oqnn909.apps.googleusercontent.com',
     clientSecret: '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',
-    callbackURL: 'http://localhost:8080/authenticate',
+    callbackURL: 'http://localhost:3000/authenticate',
     passReqToCallback: true,
     scope: ['email', 'profile']
 },

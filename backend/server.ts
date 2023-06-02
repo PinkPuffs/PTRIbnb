@@ -35,19 +35,23 @@ app.use(passport.session())
 app.get('/google', passport.authenticate('google'))
 
 app.get('/authenticate', passport.authenticate('google', {
-    successRedirect: '/',
+    successRedirect: '/success',
     failureRedirect: '/'
 }))
 
-// app.use(express.static(__dirname + 'public'));
+app.get('/success', (req, res, next) => {
+  res.send('success')
+})
 
-// app.get('/', (req, res, next) => {
-//   return res.status(200).sendFile(path.join(__dirname, '../index.html'))
-// });
+app.use(express.static(__dirname + 'public'));
 
-// app.use((req, res) => {
-//   return res.status(200).sendFile(path.join(__dirname, '../index.html'));
-// });
+app.get('/', (req, res, next) => {
+  return res.status(200).sendFile(path.join(__dirname, '../index.html'))
+});
+
+app.use((req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+});
 
 //Error Handling
 type ErrorObject = {
