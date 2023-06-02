@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import Login from "../components/Login";
+import FormOAuth from "../components/FormOAuth";
 
 export default function LoginPage() {
   return (
@@ -13,6 +14,10 @@ export default function LoginPage() {
       />
 
       <Login />
+
+      <p className="flex items-center justify-center">-------or-------</p>
+
+      <FormOAuth />
     </>
   );
 }
