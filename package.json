@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \" nodemon ./dist/bundle.js \" \" webpack --watch\"",
-    "compile": "npx tsc",
-    "start": "npm run compile && node ./dist/backend/apolloServer.js"
+    "dev": "concurrently \"webpack-dev-server --open --hot --progress\" \"nodemon backend/server.ts\"",
+    "buildcss": "tailwindcss build frontend/styles.css -o frontend/tailwind.css",
+    "buildcssprod": "NODE_ENV=production tailwindcss build frontend/styles.css -o public/styles.css"
   },
   "repository": {
     "type": "git",
@@ -57,6 +57,7 @@
     "graphql": "^16.6.0",
     "pg": "^8.11.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.2"
   }
 }

@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+
+/* custom css here */
+.test-class {
+  color: aqua;
+}
+
+@tailwind utilities;
