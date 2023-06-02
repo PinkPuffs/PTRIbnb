@@ -1,12 +1,11 @@
 import * as path from 'path';
-import express from 'express';
+import  express from 'express';
 import { Request, Response, NextFunction } from 'express';
 import env from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-
-
 // import * as routes from './routes/api';
+
 env.config();
 // Create a new Express app
 const app = express();
