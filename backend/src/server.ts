@@ -1,7 +1,5 @@
 import * as path from 'path';
 import express from 'express';
-// import { graphqlHTTP } from 'express-graphql';
-// import { buildSchema } from 'graphql';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
@@ -24,6 +22,14 @@ env.config();
 // Create a new Express app
 const app = express();
 const PORT = 3000;
+
+app.get('/', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+});
+
+app.use((req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+});
 
 const httpServer = http.createServer(app);
 
@@ -50,13 +56,6 @@ app.use(
   })
   );
 
-  app.get('/', (req, res) => {
-    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
-  });
-  
-  app.use((req, res) => {
-    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
-  });
 // Routes
 
 //Error Handling

@@ -97,7 +97,10 @@ const resolvers = {
         const { email, pw } = args;
         const query = "SELECT email, password FROM hosts WHERE email = $1, password = $2;";
         let result = await Pool.query(query, [email, pw]);
-        
+
+        if(result.row[0].email === email && result.row[0].password === pw){
+          
+        }
 
       } catch (err) {
         throw new GraphQLError("Invalid argument value", {
