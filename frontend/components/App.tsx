@@ -1,28 +1,32 @@
 import React from "react";
-// import './App.css';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
-import SignupPage from '../pages/Signup'
-import LoginPage from '../pages/Login';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Home from "./Home";
+import About from "./About";
+import Contact from "./Contact";
+import Login from "./Login";
+import Signup from "./Signup";
+import LocalHosts from "./LocalHosts";
+import PageNotFound from "./PageNotFound";
+import '../tailwind.css';
+import CodeOfConduct from "./CodeOfConduct";
+import PastTrips from "./PastTrips";
+import Profile from "./Profile";
 
-
-
-function App() {
+export default function App() {
   return (
-    <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div className="max-w-md w-full space-y-8">
-     <BrowserRouter>
+      <Router>
         <Routes>
-            <Route path="/" element={<LoginPage/>} />
-            <Route path="/signup" element={<SignupPage/>} />
+          <Route path="/" element={<Home/>}></Route>
+          <Route path="/about" element={<About/>}></Route>
+          <Route path="/contact" element={<Contact/>}></Route>
+          <Route path="/login" element={<Login/>}></Route>
+          <Route path="/signup" element={<Signup/>}></Route>
+          <Route path="/localhosts" element={<LocalHosts/>}></Route>
+          <Route path="/codeofconduct" element={<CodeOfConduct/>}></Route>
+          <Route path="/pasttrips" element={<PastTrips/>}></Route>
+          <Route path="/profile" element={<Profile/>}></Route>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
-      </BrowserRouter>
-    </div>
-  </div>
-  );
+      </Router>
+  )
 }
-
-export default App;
