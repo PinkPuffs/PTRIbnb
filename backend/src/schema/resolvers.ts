@@ -1,4 +1,5 @@
 import { GraphQLError } from "graphql";
+import pool from "../model/dbConnect";
 
 const hosts = [
   {
@@ -32,7 +33,8 @@ const hosts = [
 
 const resolvers = {
   Query: {
-    createHost: async (args) => {//args{email, pw}
+    createHost: async (args) => {
+      //args{email, pw}
       // Custom Error handling
       try {
         const { email, pw } = args;
@@ -42,8 +44,9 @@ const resolvers = {
         let result = await pool.query(query, param);
 
         //if not, create add the info to db, and return a message('Succussfully created your account!')
-        if (result.row.length === 0) {
-          const newQuery = "INSERT INTO hosts (email, password) VALUES ($1, $2);";
+        if (result.rows.length === 0) {
+          const newQuery =
+            "INSERT INTO hosts (email, password) VALUES ($1, $2);";
 
           result = await pool.query(newQuery, [email, pw]);
           return "Succussfully created your account!";
@@ -62,65 +65,61 @@ const resolvers = {
     },
     createGuest: async (args) => {
       // Custom Error handling
-    try{
-    const { email, pw } = args;
-    //check if email already exists
-    const query = "SELECT * FROM guests WHERE email = $1;";
-    const param = email;
-    let result = await pool.query(query, param);
-
-    //if not, create add the info to db, and return a message('Succussfully created your account!')
-    if (result.row.length === 0) {
-    const newQuery = "INSERT INTO guests (email, password) VALUES ($1, $2);";
-
-    result = await pool.query(newQuery, [email, pw]);
-    return "Succussfully created your account!";
-    //otherwise return a string message('Account already exist, try to Lgin!') redirect to login
-    } else if (query === param) {
-    return `Account ${query} already exist, try to Lgin!`;
-    }
-
-    } catch (err) {
-    console.log(err);
-    throw new GraphQLError("Invalid argument value", {
-    extensions: {
-      code: "BAD_USER_INPUT",
-    },
-    });
-    }
-
-      }
-    },
-    hostLogIn: async (_, args) => {
-      try{
-
+      try {
         const { email, pw } = args;
-        const query = "SELECT email, password FROM hosts WHERE email = $1, password = $2;";
-        let result = await Pool.query(query, [email, pw]);
+        //check if email already exists
+        const query = "SELECT * FROM guests WHERE email = $1;";
+        const param = email;
+        let result = await pool.query(query, param);
 
-        if(result.row[0].email === email && result.row[0].password === pw){
-          
+        //if not, create add the info to db, and return a message('Succussfully created your account!')
+        if (result.rows.length === 0) {
+          const newQuery =
+            "INSERT INTO guests (email, password) VALUES ($1, $2);";
+
+          result = await pool.query(newQuery, [email, pw]);
+          return "Succussfully created your account!";
+          //otherwise return a string message('Account already exist, try to Lgin!') redirect to login
+        } else if (query === param) {
+          return `Account ${query} already exist, try to Lgin!`;
         }
-
       } catch (err) {
+        console.log(err);
         throw new GraphQLError("Invalid argument value", {
           extensions: {
             code: "BAD_USER_INPUT",
           },
         });
       }
-      
     },
-    guestLogIn: async (_, args) => {
-      if (args.email.length <= 5 || args.pw.length <= 4) {
-        throw new GraphQLError("Invalid argument value", {
-          extensions: {
-            code: "BAD_USER_INPUT",
-          },
-        });
-      } else {
+  },
+  verifyHostLogin: async (_, args) => {
+    try {
+      const { email, pw } = args;
+      const query =
+        "SELECT email, password FROM hosts WHERE email = $1, password = $2;";
+      let result = await pool.query(query, [email, pw]);
+
+      if (result.rows[0].email === email && result.rows[0].password === pw) {
+        
       }
-    },
+    } catch (err) {
+      throw new GraphQLError("Invalid argument value", {
+        extensions: {
+          code: "BAD_USER_INPUT",
+        },
+      });
+    }
+  },
+  verifyGuestLogIn: async (_, args) => {
+    if (args.email.length <= 5 || args.pw.length <= 4) {
+      throw new GraphQLError("Invalid argument value", {
+        extensions: {
+          code: "BAD_USER_INPUT",
+        },
+      });
+    } else {
+    }
   },
 };
 

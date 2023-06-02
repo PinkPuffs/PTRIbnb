@@ -20,8 +20,8 @@ type Query {
   createHost: String
   createGuest: String
 # user(guest/host) login
-  hostLogIn(email: String!, pw: String!): Host
-  guestLogIn(email: String!, pw: String!): Guest
+  verifyHostLogin(email: String!, pw: String!): Host
+  verifyGuestLogIn(email: String!, pw: String!): Guest
 # guest browsing Host lists
   hosts: [Host]
 # query individual Host/Guest
