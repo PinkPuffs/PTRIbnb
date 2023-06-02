@@ -23,7 +23,7 @@ type Query {
   verifyHostLogin(email: String!, pw: String!): Host
   verifyGuestLogIn(email: String!, pw: String!): Guest
 # guest browsing Host lists
-  hosts: [Host]
+  getHosts(location: City): [Host]
 # query individual Host/Guest
   host(id: ID!): Host
   guest(id: ID!): Guest

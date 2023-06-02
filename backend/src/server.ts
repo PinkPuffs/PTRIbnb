@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import express from 'express';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
@@ -11,12 +11,17 @@ import env from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import { read } from 'fs';
 
 // import * as routes from './routes/api';
 
 interface MyContext {
-  token?: string;
+  auth?: String;
 }
+
+const contextFunc: object = ({ req, res }) => {
+  return { req, res }
+};
 
 env.config();
 // Create a new Express app
@@ -39,12 +44,6 @@ const server = new ApolloServer({
   plugins: [ ApolloServerPluginDrainHttpServer({ httpServer })]
 })
 
-// app.use(cors());
-// app.use(cookieParser());
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-// app.use(express.static('public'));
-
 await server.start();
 
 app.use(
@@ -52,7 +51,9 @@ app.use(
   cors(),
   bodyParser.json(),
   expressMiddleware(server, {
-    context:async ({ req }) =>({ token: req.headers.token }) 
+    context: async () => ({
+       contextFun: contextFunc
+      })
   })
   );
 
@@ -76,10 +77,8 @@ app.use((err: ErrorObject, req: Request, res: Response, next: NextFunction) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
-console.log(`🚀 Server ready at http://localhost:4000/`);
+await new Promise<void>((resolve) => httpServer.listen({ port: PORT }, resolve));
+console.log(`🚀 Server ready at http://localhost:${PORT}/`);
 
-app.listen(PORT, () => {
-    console.log(`Server is listening at http://localhost:${PORT}/ ✅`);
-  });
-export default app;
+
+export default server;
