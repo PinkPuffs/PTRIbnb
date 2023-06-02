@@ -38,6 +38,7 @@ type Host {
   availability: Boolean
   location: City!
   description: String!
+  trips: Trip
 }
 
 type Guest {
@@ -46,6 +47,7 @@ type Guest {
   email: String!
   password: String!
   userPic: String
+  trips: Trip
 }
 
 type Trip {

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"webpack-dev-server --open --hot --progress\" \"nodemon backend/src/server.ts\"",
+    "dev": "concurrently \" nodemon ./dist/bundle.js \" \" webpack --watch\"",
     "compile": "npx tsc",
     "start": "npm run compile && node ./dist/backend/apolloServer.js"
   },

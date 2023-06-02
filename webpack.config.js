@@ -6,6 +6,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: process.env.TARGET,
   entry: './frontend/index.tsx',
+  // externals: [nodeExternals(),{ knex: 'commonjs knex' }],
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
+  },
+  resolve: {
+    extensions: [ ".mjs",'.js', '.ts','.(graphql|gql)'],
   module: {
     rules: [
       {
@@ -50,6 +57,16 @@ module.exports = {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
       },
+        {
+            test: /\.(graphql|gql)$/,
+            exclude: /node_modules/,
+            loader: 'graphql-tag/loader'
+        },
+        {
+            test: /\.ts$/,
+            exclude: /node_modules/,
+            loaders: 'awesome-typescript-loader'
+        }
     ],
   },
   resolve: {
@@ -89,4 +106,5 @@ module.exports = {
     maxEntrypointSize: 512000,
     maxAssetSize: 512000
   },
+}
 };
