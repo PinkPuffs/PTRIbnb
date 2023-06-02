@@ -8,6 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"webpack-dev-server --open --hot --progress\" \"nodemon backend/server.ts\"",
     "buildcss": "tailwindcss build frontend/styles.css -o frontend/tailwind.css",
+    "buildcsswatch": "tailwindcss build frontend/styles.css -o frontend/tailwind.css --watch",
     "buildcssprod": "NODE_ENV=production tailwindcss build frontend/styles.css -o public/styles.css"
   },
   "repository": {
@@ -50,6 +51,9 @@
     "webpack-dev-server": "^4.15.0"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.14",
+    "@heroicons/react": "^2.0.18",
+    "file-loader": "^6.2.0",
     "@apollo/server": "^4.7.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
