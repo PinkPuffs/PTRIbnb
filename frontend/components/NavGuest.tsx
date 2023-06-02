@@ -7,13 +7,13 @@ import { Link } from "react-router-dom";
 import logo from "../assets/ptri-logo-sm.png";
 
 const navigation = [
-  { name: 'Sign in', to: '/login' },
-  { name: "See who's hosting", to: '/localhosts' },
-  { name: 'About us', to: '/about' },
+  { name: "My profile", to: '/profile' },
+  { name: 'Past trips', to: '/pasttrips' },
+  { name: 'Code of conduct', to: '/codeofconduct' },
   { name: 'Contact', to: '/contact' },
 ]
 
-export default function NavHome() {
+export default function NavGuest() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -47,9 +47,9 @@ export default function NavHome() {
         ))}
       </div>
       <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-        <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-          Log in <span aria-hidden="true">&rarr;</span>
-        </a>
+        <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">
+          Log out <span aria-hidden="true">&rarr;</span>
+        </Link>
       </div>
     </nav>
     <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -87,12 +87,12 @@ export default function NavHome() {
               ))}
             </div>
             <div className="py-6">
-              <a
-                href="#"
+              <Link
+                to="/"
                 className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
               >
-                Log in
-              </a>
+                Log out
+              </Link>
             </div>
           </div>
         </div>

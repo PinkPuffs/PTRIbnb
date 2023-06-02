@@ -5,8 +5,12 @@ import About from "./About";
 import Contact from "./Contact";
 import Login from "./Login";
 import Signup from "./Signup";
+import LocalHosts from "./LocalHosts";
 import PageNotFound from "./PageNotFound";
 import '../tailwind.css';
+import CodeOfConduct from "./CodeOfConduct";
+import PastTrips from "./PastTrips";
+import Profile from "./Profile";
 
 export default function App() {
   return (
@@ -17,6 +21,10 @@ export default function App() {
           <Route path="/contact" element={<Contact/>}></Route>
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/signup" element={<Signup/>}></Route>
+          <Route path="/localhosts" element={<LocalHosts/>}></Route>
+          <Route path="/codeofconduct" element={<CodeOfConduct/>}></Route>
+          <Route path="/pasttrips" element={<PastTrips/>}></Route>
+          <Route path="/profile" element={<Profile/>}></Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>
