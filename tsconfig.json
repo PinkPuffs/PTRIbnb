@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "esModuleInterop": true,
-    "target": "ES6",
-    "jsx": "react",
-    "module": "CommonJS",
     "moduleResolution": "Node",
-    "allowJs": true,
-    "sourceMap": true,
-    "outDir": "./dist",
-    "removeComments": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true
-  }
+  },
+  "include": [
+    "frontend",
+    "backend",
+    "frontend/**/*.js",
+    "frontend/**/*.jsx"
+  ]
 }

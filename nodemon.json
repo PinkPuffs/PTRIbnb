@@ -1,0 +1,9 @@
+{
+  "watch": ["backend"],
+  "ext": "js,ts,json",
+  "ignore": ["node_modules"],
+  "events": {
+    "start": "date"
+  },
+  "exec": "ts-node --esm backend/src/server.ts"
+}
