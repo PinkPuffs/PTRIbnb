@@ -1,32 +1,32 @@
 import path from 'path';
 import express from 'express';
-import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
-import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { Request, Response, NextFunction } from 'express';
-import typeDefs from './schema/type-defs.js';
-import  resolvers from './schema/resolvers.js';
+import { graphqlHTTP } from 'express-graphql';
+import schema from './schema/typeSchema';
+import  root from './schema/roots';
 import http from 'http';
 import env from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
-import { read } from 'fs';
 
-// import * as routes from './routes/api';
 
-interface MyContext {
-  auth?: String;
-}
-
-const contextFunc: object = ({ req, res }) => {
-  return { req, res }
-};
 
 env.config();
 // Create a new Express app
 const app = express();
 const PORT = 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: schema,
+    rootValue: root,
+    graphiql: true,
+  })
+);
 
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../index.html'));
@@ -36,26 +36,6 @@ app.use((req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../index.html'));
 });
 
-const httpServer = http.createServer(app);
-
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  plugins: [ ApolloServerPluginDrainHttpServer({ httpServer })]
-})
-
-await server.start();
-
-app.use(
-  '/',
-  cors(),
-  bodyParser.json(),
-  expressMiddleware(server, {
-    context: async () => ({
-       contextFun: contextFunc
-      })
-  })
-  );
 
 // Routes
 
@@ -77,8 +57,6 @@ app.use((err: ErrorObject, req: Request, res: Response, next: NextFunction) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-await new Promise<void>((resolve) => httpServer.listen({ port: PORT }, resolve));
-console.log(`🚀 Server ready at http://localhost:${PORT}/`);
+app.listen(PORT, () => console.log(`Server is running on Port:${PORT}`))
 
-
-export default server;
+export default app;

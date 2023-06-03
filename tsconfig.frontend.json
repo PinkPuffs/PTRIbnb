@@ -1,24 +1,22 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-      "target": "ES6",
-      "jsx": "react",
-      "module": "CommonJS",
-      "allowJs": true,
-      "sourceMap": true,
-      "outDir": "./dist",
-      "removeComments": true,
-      "forceConsistentCasingInFileNames": true,
-      "strict": true,
-      "skipLibCheck": true
-    },
-    "include": [
-      "frontend/**/*.ts",
-      "frontend/**/*.tsx",
-      "frontend/**/*.js",
-      "frontend/**/*.jsx"
-    ],
-    "exclude": [
-      "backend"
-    ]
-  }
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES6",
+    "jsx": "react",
+    "module": "CommonJS",
+    "allowJs": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "removeComments": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "frontend/**/*.ts",
+    "frontend/**/*.tsx",
+    "frontend/**/*.js",
+    "frontend/**/*.jsx"
+  ],
+  "exclude": ["backend"]
+}

@@ -54,7 +54,7 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: ["@svgr/webpack"],
+        loader: ["@svgr/webpack"],
       },
       {
         test: /\.(graphql|gql)$/,
@@ -64,7 +64,7 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        use: "awesome-typescript-loader",
+        loader: "awesome-typescript-loader",
       },
     ],
   },

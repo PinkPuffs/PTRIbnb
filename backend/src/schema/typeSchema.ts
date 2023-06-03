@@ -1,9 +1,7 @@
-import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
+import { buildSchema } from "graphql";
 
+const schema = buildSchema(`
 
-
-const typeDefs = `#graphql
 
 enum City {
   New York
@@ -17,8 +15,9 @@ enum City {
 
 type Query {
 # create user
-  createHost: String
-  createGuest: String
+#  createHost: String
+# createGuest: String
+
 # user(guest/host) login
   verifyHostLogin(email: String!, pw: String!): Host
   verifyGuestLogIn(email: String!, pw: String!): Guest
@@ -36,7 +35,7 @@ type Host {
   password: String!
   userPic: String
   availability: Boolean
-  location: City!
+  location: String!
   description: String!
   trips: Trip
 }
@@ -58,6 +57,7 @@ type Trip {
   departure: String!
   confirmation: Boolean
 }
-`
+`)
 
-export default typeDefs;
+
+export default schema;
