@@ -11,6 +11,7 @@ import '../tailwind.css';
 import CodeOfConduct from "./CodeOfConduct";
 import PastTrips from "./PastTrips";
 import Profile from "./Profile";
+import ListingDetails from "./ListingDetails";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/signup" element={<Signup/>}></Route>
           <Route path="/localhosts" element={<LocalHosts/>}></Route>
+            {/* <Route path="/listingdetails" element={<ListingDetails/>}></Route> */}
           <Route path="/codeofconduct" element={<CodeOfConduct/>}></Route>
           <Route path="/pasttrips" element={<PastTrips/>}></Route>
           <Route path="/profile" element={<Profile/>}></Route>
