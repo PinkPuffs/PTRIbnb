@@ -1,4 +1,5 @@
 import { GraphQLError } from "graphql";
+import pool from '../../../backend/model/dbConnect'
 
 const hosts = [
   {
@@ -32,7 +33,7 @@ const hosts = [
 
 const resolvers = {
   Query: {
-    createHost: async (args) => {//args{email, pw}
+    createHost: async (args:any) => {//args{email, pw}
       // Custom Error handling
       try {
         const { email, pw } = args;
@@ -42,7 +43,7 @@ const resolvers = {
         let result = await pool.query(query, param);
 
         //if not, create add the info to db, and return a message('Succussfully created your account!')
-        if (result.row.length === 0) {
+        if (result.rows.length === 0) {
           const newQuery = "INSERT INTO hosts (email, password) VALUES ($1, $2);";
 
           result = await pool.query(newQuery, [email, pw]);
@@ -60,7 +61,7 @@ const resolvers = {
         });
       }
     },
-    createGuest: async (args) => {
+    createGuest: async (args:any) => {
       // Custom Error handling
     try{
     const { email, pw } = args;
@@ -70,7 +71,7 @@ const resolvers = {
     let result = await pool.query(query, param);
 
     //if not, create add the info to db, and return a message('Succussfully created your account!')
-    if (result.row.length === 0) {
+    if (result.rows.length === 0) {
     const newQuery = "INSERT INTO guests (email, password) VALUES ($1, $2);";
 
     result = await pool.query(newQuery, [email, pw]);
@@ -89,16 +90,16 @@ const resolvers = {
     });
     }
 
-      }
+
     },
-    hostLogIn: async (_, args) => {
+    hostLogIn: async (_:any, args:any) => {
       try{
 
         const { email, pw } = args;
         const query = "SELECT email, password FROM hosts WHERE email = $1, password = $2;";
-        let result = await Pool.query(query, [email, pw]);
+        let result = await pool.query(query, [email, pw]);
 
-        if(result.row[0].email === email && result.row[0].password === pw){
+        if(result.rows[0].email === email && result.rows[0].password === pw){
           
         }
 
@@ -111,7 +112,7 @@ const resolvers = {
       }
       
     },
-    guestLogIn: async (_, args) => {
+    guestLogIn: async (_: any, args:any) => {
       if (args.email.length <= 5 || args.pw.length <= 4) {
         throw new GraphQLError("Invalid argument value", {
           extensions: {
