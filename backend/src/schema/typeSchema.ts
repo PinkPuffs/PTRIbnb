@@ -15,12 +15,12 @@ enum City {
 
 type Query {
 # create user
-#  createHost: String
+# createHost: String
 # createGuest: String
 
 # user(guest/host) login
   verifyHostLogin(email: String!, pw: String!): Host
-  verifyGuestLogIn(email: String!, pw: String!): Guest
+  verifyGuestLogin(email: String!, pw: String!): Guest
 # guest browsing Host lists
   getHosts(location: City): [Host]
 # query individual Host/Guest
@@ -37,7 +37,6 @@ type Host {
   availability: Boolean
   location: String!
   description: String!
-  trips: Trip
 }
 
 type Guest {
@@ -46,7 +45,6 @@ type Guest {
   email: String!
   password: String!
   userPic: String
-  trips: Trip
 }
 
 type Trip {

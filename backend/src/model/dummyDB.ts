@@ -8,7 +8,6 @@ const hosts = [
     availability: true,
     location: 'New York',
     description: "I love hosting",
-    trips: null
   },
   {
     id: 2,
@@ -19,7 +18,6 @@ const hosts = [
     availability: true,
     location: "New York",
     description: "I love traveling",
-    trips: null
   },
   {
     id: 3,
@@ -30,7 +28,6 @@ const hosts = [
     availability: true,
     location: "New York",
     description: "I love cooking",
-    trips: null
   },
 ];
 
@@ -41,7 +38,6 @@ const guests = [
     email: "Wick@test.com",
     password: 'abc123',
     userPic: "hjksahkjdhaskd",
-    trips: null
   },
   {
     id: 20,
@@ -49,7 +45,6 @@ const guests = [
     email: "Elsa@test.com",
     password: 'abc123',
     userPic: "amydjksskd",
-    trips: null
   },
   {
     id: 30,
@@ -57,7 +52,6 @@ const guests = [
     email: "Ariel@test.com",
     password: 'abc123',
     userPic: "jennsahkjdhaskd",
-    trips: null
   },
 ];
 

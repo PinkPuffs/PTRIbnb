@@ -1,13 +1,17 @@
-import { Pool } from 'pg'
+import { Pool } from "pg";
 
-const PG_URI = process.env.PG_URI
+const PG_URI =
+  "postgres://rotidjzd:liSWzMR0Fd7TIxqG81grgH1_fEAyTeVh@mahmud.db.elephantsql.com/rotidjzd";
 
 const pool = new Pool({
-  connectionString: PG_URI
+  // user: 'rotidjzd',
+  // host: 'localhost',
+  // database: 'rotidjzd',
+  connectionString: PG_URI,
 });
 
-pool.on('error', (err) => {
-  console.error('Unexpected error on idle client', err)
-})
+pool.on("error", (err) => {
+  console.error("Unexpected error on idle client", err);
+});
 
-export default pool
+export default pool;
