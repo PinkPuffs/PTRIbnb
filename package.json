@@ -6,10 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"webpack-dev-server --open --hot --progress\" \"nodemon backend/server.ts\"",
-    "buildcss": "tailwindcss build frontend/styles.css -o frontend/tailwind.css",
-    "buildcss-watch": "tailwindcss build frontend/styles.css -o frontend/tailwind.css --watch",
-    "buildcssprod": "NODE_ENV=production tailwindcss build frontend/styles.css -o public/styles.css",
+    "dev": "concurrently \"webpack-dev-server --open --hot --progress\" \"nodemon backend/src/server.ts\"",
     "buildcss": "tailwindcss build frontend/styles.css -o frontend/tailwind.css",
     "buildcsswatch": "tailwindcss build frontend/styles.css -o frontend/tailwind.css --watch",
     "buildcssprod": "NODE_ENV=production tailwindcss build frontend/styles.css -o public/styles.css"
