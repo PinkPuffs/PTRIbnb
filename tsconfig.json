@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+  },
+  "include": [
+    "frontend",
+    "backend",
+    "frontend/**/*.js",
+    "frontend/**/*.jsx"
+  ]
+}

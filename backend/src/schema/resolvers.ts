@@ -33,8 +33,7 @@ const hosts = [
 
 const resolvers = {
   Query: {
-    createHost: async (args) => {
-      //args{email, pw}
+    createHost: async (args:any) => {//args{email, pw}
       // Custom Error handling
       try {
         const { email, pw } = args;
@@ -60,7 +59,7 @@ const resolvers = {
         });
       }
     },
-    createGuest: async (args) => {
+    createGuest: async (args:any) => {
       // Custom Error handling
       try {
         const { email, pw } = args;

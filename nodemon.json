@@ -5,5 +5,5 @@
   "events": {
     "start": "date"
   },
-  "exec": "ts-node --esm bakcend/server.ts"
+  "exec": "ts-node --esm backend/src/server.ts"
 }

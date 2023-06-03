@@ -15,7 +15,12 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: {
+          loader: "ts-loader",
+          options: {
+            configFile: path.resolve(__dirname, "tsconfig.frontend.json"),
+          },
+        },
         exclude: [/node_modules/],
       },
       {
@@ -45,11 +50,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: "file-loader",
-          },
-        ],
+        loader: "file-loader",
       },
       {
         test: /\.svg$/,
@@ -63,7 +64,7 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        loaders: "awesome-typescript-loader",
+        use: "awesome-typescript-loader",
       },
     ],
   },
@@ -76,7 +77,10 @@ module.exports = {
       ".json",
       ".css",
       ".scss",
+      ".png",
       ".mjs",
+      ".js",
+      ".ts",
       ".(graphql|gql)",
     ],
     modules: ["frontend", "node_modules"],
@@ -98,17 +102,12 @@ module.exports = {
       secure: false,
     },
   },
-  output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist/public"),
-  },
-
   plugins: [
     new HtmlWebpackPlugin({
       template: "./index.html",
     }),
   ],
-  //temporarily getting rid of webpack 'file size' errors - TODO: compress images better so they don't exceed recommended file size
+  // //temporarily getting rid of webpack 'file size' errors - TODO: compress images better so they don't exceed recommended file size
   performance: {
     hints: false,
     maxEntrypointSize: 512000,
