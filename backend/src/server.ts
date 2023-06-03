@@ -1,15 +1,14 @@
-import path from 'path';
-import express from 'express';
-import { Request, Response, NextFunction } from 'express';
-import { graphqlHTTP } from 'express-graphql';
-import schema from './schema/typeSchema';
-import  root from './schema/roots';
-import http from 'http';
-import env from 'dotenv';
-import cors from 'cors';
-import cookieParser from 'cookie-parser';
-
-
+import path from "path";
+import express from "express";
+import { Request, Response, NextFunction } from "express";
+import { graphqlHTTP } from "express-graphql";
+import schema from "./schema/typeSchema";
+import root from "./schema/roots";
+import http from "http";
+import env from "dotenv";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import pool from "./model/dbConnect";
 
 env.config();
 // Create a new Express app
@@ -29,14 +28,13 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+app.get("/", (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, "../index.html"));
 });
 
 app.use((req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+  return res.status(200).sendFile(path.join(__dirname, "../index.html"));
 });
-
 
 // Routes
 
@@ -49,15 +47,19 @@ type ErrorObject = {
 
 app.use((err: ErrorObject, req: Request, res: Response, next: NextFunction) => {
   const defaultErr: ErrorObject = {
-    log: 'Express error handler caught unknown middleware error',
+    log: "Express error handler caught unknown middleware error",
     status: 400,
-    message: { error: 'An error occured' },
+    message: { error: "An error occured" },
   };
   const errorObj = Object.assign(defaultErr, err);
   console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, () => console.log(`Server is running on Port:${PORT}`))
+pool.connect(() => {
+  console.log("DB connected!");
+});
+
+app.listen(PORT, () => console.log(`Server is running on Port:${PORT}`));
 
 export default app;
