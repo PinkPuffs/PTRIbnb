@@ -5,19 +5,22 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: process.env.TARGET,
-  entry: './frontend/index.tsx',
+  entry: "./frontend/index.tsx",
   // externals: [nodeExternals(),{ knex: 'commonjs knex' }],
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
   },
-  resolve: {
-    extensions: [ ".mjs",'.js', '.ts','.(graphql|gql)'],
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: {
+          loader: "ts-loader",
+          options: {
+            configFile: path.resolve(__dirname, "tsconfig.frontend.json"),
+          },
+        },
         exclude: [/node_modules/],
       },
       {
@@ -53,20 +56,33 @@ module.exports = {
         test: /\.svg$/,
         use: ["@svgr/webpack"],
       },
-        {
-            test: /\.(graphql|gql)$/,
-            exclude: /node_modules/,
-            loader: 'graphql-tag/loader'
-        },
-        {
-            test: /\.ts$/,
-            exclude: /node_modules/,
-            loaders: 'awesome-typescript-loader'
-        }
+      {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: "graphql-tag/loader",
+      },
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: "awesome-typescript-loader",
+      },
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".css", ".scss"],
+    extensions: [
+      ".js",
+      ".jsx",
+      ".ts",
+      ".tsx",
+      ".json",
+      ".css",
+      ".scss",
+      ".png",
+      ".mjs",
+      ".js",
+      ".ts",
+      ".(graphql|gql)",
+    ],
     modules: ["frontend", "node_modules"],
   },
   devServer: {
@@ -86,21 +102,15 @@ module.exports = {
       secure: false,
     },
   },
-  output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist/public"),
-  },
-
   plugins: [
     new HtmlWebpackPlugin({
       template: "./index.html",
     }),
   ],
-  //temporarily getting rid of webpack 'file size' errors - TODO: compress images better so they don't exceed recommended file size
+  // //temporarily getting rid of webpack 'file size' errors - TODO: compress images better so they don't exceed recommended file size
   performance: {
     hints: false,
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
-}
 };
